@@ -4,6 +4,10 @@
 
   let currentInput = "";
 
+  function isOperator(char) {
+    return ["+", "-", "×", "÷", "%", "^"].includes(char);
+  }
+
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const value = button.textContent;
@@ -16,7 +20,6 @@
         display.textContent = currentInput || "0";
       } else if (button.classList.contains("equal")) {
         try {
-          // Replace symbols with JS operators
           let expression = currentInput
             .replace(/×/g, "*")
             .replace(/÷/g, "/")
@@ -29,7 +32,13 @@
           currentInput = "";
         }
       } else {
-        currentInput += value;
+    
+        if (isOperator(value) && isOperator(currentInput.slice(-1))) {
+          
+          currentInput = currentInput.slice(0, -1) + value;
+        } else {
+          currentInput += value;
+        }
         display.textContent = currentInput;
       }
     });
