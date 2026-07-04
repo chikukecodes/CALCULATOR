@@ -83,3 +83,10 @@ h1{
   font-size: 1.2em;
 }
         
+.clear:hover {
+  background: #f90707;
+}
+
+.backspace:hover {
+  background: #f90707;
+}
