@@ -32,9 +32,16 @@
           currentInput = "";
         }
       } else {
-    
+        if (value === ".") {
+          // Prevent multiple decimals in the same number
+          let parts = currentInput.split(/[\+\-\×\÷\%\^]/);
+          let lastPart = parts[parts.length - 1];
+          if (lastPart.includes(".")) {
+            return; // ignore extra decimal
+          }
+        }
+
         if (isOperator(value) && isOperator(currentInput.slice(-1))) {
-          
           currentInput = currentInput.slice(0, -1) + value;
         } else {
           currentInput += value;
